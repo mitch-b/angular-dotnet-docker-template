@@ -5,7 +5,7 @@ services:
     build:
       context: ui
       args:
-        CONFIGURATION: development
+        CONFIGURATION: production
     image: mitchellbarry/web-template-ui:dev
     environment:
       - TZ=America/Chicago
