@@ -13,7 +13,8 @@
 
 ```powershell
 # do not change this
-$TemplateName = "web-template"; $TemplateNamespace = "WebTemplate"
+$TemplateName = "web-template"
+$TemplateNamespace = "WebTemplate"
 
 # you change these!
 $NewProjectName = "my-new-app"
@@ -29,6 +30,7 @@ $files | % {
     .replace($TemplateNamespace,$NewProjectNamespace)
   | Set-Content $_.FullName
 }
+gci -Filter "$($TemplateNamespace)*" -Recurse | rni -NewName {$_.name -Replace $TemplateNamespace,$NewProjectNamespace }
 ```
 
 ## Building / Running
