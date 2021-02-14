@@ -1,10 +1,9 @@
-ARG CONFIGURATION=production
-
 #
 # Stage 1: Build Angular app
 #
 
 FROM node:lts-alpine AS build
+ARG CONFIGURATION=production
 
 WORKDIR /opt/ng
 
