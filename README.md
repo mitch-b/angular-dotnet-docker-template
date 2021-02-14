@@ -25,10 +25,7 @@ cd $NewProjectName
 
 $files = gci . -Recurse -Include "*.cs","*.json","*.ts","*.csproj","*.yml","Dockerfile",".*ignore" | select FullName
 $files | % {
-  (gc $_.FullName)
-    .replace($TemplateName,$NewProjectName)
-    .replace($TemplateNamespace,$NewProjectNamespace)
-  | Set-Content $_.FullName
+  (gc $_.FullName).replace($TemplateName,$NewProjectName).replace($TemplateNamespace,$NewProjectNamespace) | Set-Content $_.FullName
 }
 gci -Filter "$($TemplateNamespace)*" -Recurse | rni -NewName {$_.name -Replace $TemplateNamespace,$NewProjectNamespace }
 ```
