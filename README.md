@@ -22,7 +22,13 @@ $NewProjectNamespace = "MyNewApp"
 git clone https://github.com/mitch-b/angular-dotnet-docker-template $NewProjectName
 cd $NewProjectName
 
-# todo ... file renames from template
+$files = gci . -Recurse -Include "*.cs","*.json","*.ts","*.csproj","*.yml","Dockerfile",".*ignore" | select FullName
+$files | % {
+  (gc $_.FullName)
+    .replace($TemplateName,$NewProjectName)
+    .replace($TemplateNamespace,$NewProjectNamespace)
+  | Set-Content $_.FullName
+}
 ```
 
 ## Building / Running

@@ -1,23 +1,23 @@
 version: '3.8'
 
 services:
-  webtemplate-ui:
+  web-template-ui:
     build:
       context: ui
       args:
         CONFIGURATION: development
-    image: mitchellbarry/webtemplate-ui:dev
+    image: mitchellbarry/web-template-ui:dev
     environment:
       - TZ=America/Chicago
     ports:
       - 8876:80
 
-  webtemplate-api:
+  web-template-api:
     build:
       context: api
       args:
         CONFIGURATION: Debug
-    image: mitchellbarry/webtemplate-api:dev
+    image: mitchellbarry/web-template-api:dev
     environment:
       - TZ=America/Chicago
       - ASPNETCORE_ENVIRONMENT=Development
