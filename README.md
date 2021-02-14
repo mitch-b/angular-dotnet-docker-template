@@ -7,18 +7,20 @@
 
 ## Get Started
 
+Copy the entire script into your shell and run:
+
 #### PowerShell
 
 [Download PowerShell](https://github.com/PowerShell/PowerShell/releases)
 
 ```powershell
-# do not change this
-$TemplateName = "web-template"
-$TemplateNamespace = "WebTemplate"
-
 # you change these!
 $NewProjectName = "my-new-app"
 $NewProjectNamespace = "MyNewApp"
+
+# do not change this
+$TemplateName = "web-template"
+$TemplateNamespace = "WebTemplate"
 
 git clone https://github.com/mitch-b/angular-dotnet-docker-template $NewProjectName
 cd $NewProjectName
@@ -28,6 +30,15 @@ $files | % {
   (gc $_.FullName).replace($TemplateName,$NewProjectName).replace($TemplateNamespace,$NewProjectNamespace) | Set-Content $_.FullName
 }
 gci -Filter "$($TemplateNamespace)*" -Recurse | rni -NewName {$_.name -Replace $TemplateNamespace,$NewProjectNamespace }
+
+# remove existing repo and re-init
+rm .git -Force -Recurse
+git init
+git add .
+git commit -m "Initial commit"
+
+git status
+
 ```
 
 ## Building / Running
